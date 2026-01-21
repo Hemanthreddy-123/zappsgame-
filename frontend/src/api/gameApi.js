@@ -1,35 +1,36 @@
 import { httpJson } from './http.js'
 
-export async function startGame({ token }) {
-  return await httpJson('/api/game/start', {
+export function apiLogin({ username, password }) {
+  return httpJson('/api/login', {
     method: 'POST',
-    token,
+    body: { username, password },
   })
 }
 
-export async function submitGame({ token, roundId, synonyms, antonyms, timeTaken }) {
-  return await httpJson('/api/game/submit', {
-    method: 'POST',
-    token,
-    body: {
-      round_id: roundId,
-      synonyms,
-      antonyms,
-      time_taken: timeTaken,
-    },
-  })
-}
-
-export async function getGameScore({ token }) {
-  return await httpJson('/api/game/score', {
+export function apiMe({ token }) {
+  return httpJson('/api/me', {
     method: 'GET',
     token,
   })
 }
 
-export async function getLeaderboard({ token }) {
-  return await httpJson('/api/leaderboard', {
-    method: 'GET',
+export function apiLogout({ token }) {
+  return httpJson('/api/logout', {
+    method: 'POST',
     token,
+  })
+}
+
+export function apiOtpRequest({ channel, phone, email, team_no }) {
+  return httpJson('/api/otp/request', {
+    method: 'POST',
+    body: { channel, phone, email, team_no },
+  })
+}
+
+export function apiOtpVerify({ challenge_id, otp }) {
+  return httpJson('/api/otp/verify', {
+    method: 'POST',
+    body: { challenge_id, otp },
   })
 }
