@@ -26,6 +26,7 @@ function GamePage() {
   const timerRef = useRef(null);
   const startTimeRef = useRef(null);
   const submittedRef = useRef(false); // prevents double submit
+  const currentRoundIdRef = useRef(null); // Store round_id separately
 
   /* ================= INITIALIZE GAME ================= */
 
@@ -47,6 +48,7 @@ function GamePage() {
       const data = await startGame({ token });
 
       setGameData(data);
+      currentRoundIdRef.current = data.round_id; // Store round_id in ref
       setTimeLeft(data.time_limit);
       setAvailableWords(data.words);
       setSynonymBox([]);
@@ -102,10 +104,17 @@ function GamePage() {
         })),
       );
 
+      // Get round_id from ref to ensure it's always available
+      const roundId = currentRoundIdRef.current || gameData?.round_id;
+
+      if (!roundId) {
+        throw new Error("No round ID available for submission");
+      }
+
       // Submit with whatever progress they have
       const result = await submitGame({
         token,
-        roundId: gameData?.round_id,
+        roundId: roundId,
         synonyms: synonymBox.map((w) => w.id),
         antonyms: antonymBox.map((w) => w.id),
         timeTaken,
@@ -116,7 +125,7 @@ function GamePage() {
       setGameState("completed");
     } catch (err) {
       console.error("Submit error on time up:", err);
-      setError("Failed to submit game after time expired");
+      setError("Failed to submit game after time expired: " + err.message);
       setGameState("error");
     }
   };
@@ -192,9 +201,16 @@ function GamePage() {
         })),
       );
 
+      // Get round_id from ref to ensure it's always available
+      const roundId = currentRoundIdRef.current || gameData?.round_id;
+
+      if (!roundId) {
+        throw new Error("No round ID available for submission");
+      }
+
       const result = await submitGame({
         token,
-        roundId: gameData?.round_id,
+        roundId: roundId,
         synonyms: synonymBox.map((w) => w.id),
         antonyms: antonymBox.map((w) => w.id),
         timeTaken,
@@ -204,7 +220,7 @@ function GamePage() {
       setGameState("completed");
     } catch (err) {
       console.error("Submit error:", err);
-      setError("Failed to submit game");
+      setError("Failed to submit game: " + err.message);
       setGameState("error");
     }
   };
@@ -213,6 +229,7 @@ function GamePage() {
 
   const handlePlayAgain = () => {
     if (timerRef.current) clearInterval(timerRef.current);
+    currentRoundIdRef.current = null; // Reset round_id ref
     initializeGame();
   };
 
