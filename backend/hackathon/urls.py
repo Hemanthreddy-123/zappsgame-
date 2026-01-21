@@ -2,7 +2,7 @@ from django.urls import path
 
 from .views import (
     ApiLoginView, ApiLogoutView, ApiMeView, ApiOtpRequestView, ApiOtpVerifyView, HealthView,
-    GameStartView, GameSubmitView, GameScoreView, LeaderboardView
+    GameStartView, GameSubmitView, GameScoreView, LeaderboardView, DebugGameView
 )
 
 urlpatterns = [
@@ -18,4 +18,5 @@ urlpatterns = [
     path('api/game/submit', GameSubmitView.as_view(), name='game_submit'),
     path('api/game/score', GameScoreView.as_view(), name='game_score'),
     path('api/leaderboard', LeaderboardView.as_view(), name='leaderboard'),
+    path('api/game/debug', DebugGameView.as_view(), name='game_debug'),
 ]
