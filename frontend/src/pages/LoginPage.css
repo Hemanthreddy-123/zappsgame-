@@ -3,10 +3,14 @@
 -------------------------------- */
 .page-wrapper {
     width: 100%;
+<<<<<<< HEAD
     height: 100vh;
     /* Changed from min-height so we can scroll internally */
     overflow-y: auto;
     /* Enable scrolling */
+=======
+    min-height: 100vh;
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
     background: url("../assets/hackathon_bg.webp") center / cover no-repeat;
     display: flex;
     justify-content: flex-end;
@@ -40,7 +44,11 @@
    Logo
 -------------------------------- */
 .logo {
+<<<<<<< HEAD
     margin-bottom: 20px;
+=======
+    margin-bottom: 36px;
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
     display: flex;
     align-items: center;
     justify-content: center
@@ -62,7 +70,11 @@ label {
    Form Fields
 -------------------------------- */
 .field {
+<<<<<<< HEAD
     margin-bottom: 16px;
+=======
+    margin-bottom: 24px;
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
 }
 
 .field input {
@@ -106,7 +118,11 @@ label {
     gap: 12px;
     font-size: 14px;
     color: var(--dark-2);
+<<<<<<< HEAD
     margin-bottom: 12px;
+=======
+    margin-bottom: 16px;
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
 }
 
 .key-icon {
@@ -158,7 +174,11 @@ label {
     text-align: center;
     font-size: 12px;
     color: var(--light-2);
+<<<<<<< HEAD
     margin: 16px 0;
+=======
+    margin: 24px 0;
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
 }
 
 /* -------------------------------
@@ -327,6 +347,7 @@ label {
         height: 40px;
     }
 }
+<<<<<<< HEAD
 
 /* --- Theme Toggle --- */
 .theme-toggle-login {
@@ -387,3 +408,5 @@ body.dark-mode .login-btn {
 body.dark-mode .login-btn:hover {
     background: #2563eb;
 }
+=======
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862

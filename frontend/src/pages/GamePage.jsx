@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext.jsx";
 import { startGame, submitGame } from "../api/gameApi.js";
+<<<<<<< HEAD
 import { toPng } from 'html-to-image';
 import userAvatar from '../assets/user_avatar.png';
 import "./GamePage.css";
@@ -11,10 +12,18 @@ function GamePage() {
   const navigate = useNavigate();
   const { token, user, member, signOut, updateMember } = useAuth();
   const { theme, toggleTheme } = useTheme();
+=======
+import "./GamePage.css";
+
+function GamePage() {
+  const navigate = useNavigate();
+  const { token, user, member } = useAuth();
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
 
   const [gameState, setGameState] = useState("loading"); // loading | playing | completed | error
   const [gameData, setGameData] = useState(null);
   const [timeLeft, setTimeLeft] = useState(0);
+<<<<<<< HEAD
   const [level, setLevel] = useState((localStorage.getItem('sortonym_level') || 'easy').toLowerCase()); // Level State
 
   // Dropdown & Edit State
@@ -61,6 +70,8 @@ function GamePage() {
     setIsEditing(false);
     setEditName(member?.name || '');
   }
+=======
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
 
   const [synonymBox, setSynonymBox] = useState([]);
   const [antonymBox, setAntonymBox] = useState([]);
@@ -69,15 +80,21 @@ function GamePage() {
   const [finalAntonyms, setFinalAntonyms] = useState([]);
 
   const [draggedWord, setDraggedWord] = useState(null);
+<<<<<<< HEAD
   const [dragOverBox, setDragOverBox] = useState(null); // 'synonyms' | 'antonyms' | 'available' | null
+=======
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
   const [results, setResults] = useState(null);
   const [error, setError] = useState("");
   const [timeExpired, setTimeExpired] = useState(false);
 
   const timerRef = useRef(null);
   const startTimeRef = useRef(null);
+<<<<<<< HEAD
   const resultsRef = useRef(null);
   const certificateRef = useRef(null);
+=======
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
   const submittedRef = useRef(false); // prevents double submit
   const currentRoundIdRef = useRef(null); // Store round_id separately
 
@@ -88,6 +105,7 @@ function GamePage() {
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
+<<<<<<< HEAD
   }, [level]); // Re-run when level changes
 
   const initializeGame = async () => {
@@ -95,11 +113,18 @@ function GamePage() {
       if (timerRef.current) clearInterval(timerRef.current);
 
       // RESET STATE IMMEDIATELY (Before Async Call)
+=======
+  }, []);
+
+  const initializeGame = async () => {
+    try {
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
       setGameState("loading");
       setError("");
       setTimeExpired(false);
       submittedRef.current = false;
       setResults(null);
+<<<<<<< HEAD
       setSynonymBox([]);
       setAntonymBox([]);
       setFinalSynonyms([]);
@@ -110,11 +135,22 @@ function GamePage() {
       currentRoundIdRef.current = null;
 
       const data = await startGame({ token, level }); // Pass level
+=======
+
+      const data = await startGame({ token });
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
 
       setGameData(data);
       currentRoundIdRef.current = data.round_id; // Store round_id in ref
       setTimeLeft(data.time_limit);
       setAvailableWords(data.words);
+<<<<<<< HEAD
+=======
+      setSynonymBox([]);
+      setAntonymBox([]);
+      setFinalSynonyms([]);
+      setFinalAntonyms([]);
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
 
       startTimeRef.current = Date.now();
       setGameState("playing");
@@ -123,18 +159,27 @@ function GamePage() {
         setTimeLeft((prev) => {
           if (prev <= 1) {
             clearInterval(timerRef.current);
+<<<<<<< HEAD
             // Only trigger auto-submit if not already submitted manually
             if (!submittedRef.current) {
               submitOnTimeUp();
             }
+=======
+            // When time runs out, submit with current progress
+            submitOnTimeUp();
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
             return 0;
           }
           return prev - 1;
         });
       }, 1000);
     } catch (err) {
+<<<<<<< HEAD
       console.error("Initialize Game Error:", err);
       setError("Failed to start game: " + (err.message || "Unknown error"));
+=======
+      setError("Failed to start game");
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
       setGameState("error");
     }
   };
@@ -156,14 +201,22 @@ function GamePage() {
       setFinalSynonyms(
         synonymBox.map((w) => ({
           ...w,
+<<<<<<< HEAD
           correct: w.id.startsWith("syn_"),
+=======
+          correct: w.type === "synonym",
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
         })),
       );
 
       setFinalAntonyms(
         antonymBox.map((w) => ({
           ...w,
+<<<<<<< HEAD
           correct: w.id.startsWith("ant_"),
+=======
+          correct: w.type === "antonym",
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
         })),
       );
 
@@ -171,8 +224,12 @@ function GamePage() {
       const roundId = currentRoundIdRef.current || gameData?.round_id;
 
       if (!roundId) {
+<<<<<<< HEAD
         console.warn("Skipping submission: No round ID available (game likely reset)");
         return;
+=======
+        throw new Error("No round ID available for submission");
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
       }
 
       // Submit with whatever progress they have
@@ -183,7 +240,10 @@ function GamePage() {
         antonyms: antonymBox.map((w) => w.id),
         timeTaken,
         reason: "TIME_EXPIRED",
+<<<<<<< HEAD
         level, // Pass level for scoring
+=======
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
       });
 
       setResults(result);
@@ -198,6 +258,7 @@ function GamePage() {
   /* ================= DRAG & DROP ================= */
 
   const handleDragStart = (e, word) => {
+<<<<<<< HEAD
     if (timeExpired || submittedRef.current) return;
     setDraggedWord(word);
 
@@ -215,6 +276,11 @@ function GamePage() {
     e.target.classList.remove('dragging');
     setDraggedWord(null);
     setDragOverBox(null);
+=======
+    if (timeExpired) return;
+    setDraggedWord(word);
+    e.dataTransfer.effectAllowed = "move";
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
   };
 
   const handleDragOver = (e) => {
@@ -222,6 +288,7 @@ function GamePage() {
     e.dataTransfer.dropEffect = "move";
   };
 
+<<<<<<< HEAD
   const handleDragEnter = (e, targetBox) => {
     e.preventDefault();
     if (timeExpired || submittedRef.current) return;
@@ -242,6 +309,15 @@ function GamePage() {
     // ❌ block overflow
     if (targetBox === "synonyms" && synonymBox.length >= maxPerBox) return;
     if (targetBox === "antonyms" && antonymBox.length >= maxPerBox) return;
+=======
+  const handleDrop = (e, targetBox) => {
+    e.preventDefault();
+    if (!draggedWord || timeExpired) return;
+
+    // ❌ block overflow
+    if (targetBox === "synonyms" && synonymBox.length >= 4) return;
+    if (targetBox === "antonyms" && antonymBox.length >= 4) return;
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
 
     // remove word from all boxes
     setAvailableWords((p) => p.filter((w) => w.id !== draggedWord.id));
@@ -258,7 +334,10 @@ function GamePage() {
     }
 
     setDraggedWord(null);
+<<<<<<< HEAD
     setDragOverBox(null);
+=======
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
   };
 
   /* ================= MANUAL SUBMIT ================= */
@@ -266,14 +345,23 @@ function GamePage() {
   const handleSubmit = async () => {
     if (submittedRef.current || timeExpired) return;
 
+<<<<<<< HEAD
     const maxPerBox = gameData?.words.length / 2 || 4;
     if (synonymBox.length !== maxPerBox || antonymBox.length !== maxPerBox) {
       alert(`You must place exactly ${maxPerBox} words in Synonyms and ${maxPerBox} in Antonyms.`);
+=======
+    if (synonymBox.length !== 4 || antonymBox.length !== 4) {
+      alert("You must place exactly 4 words in Synonyms and 4 in Antonyms.");
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
       return;
     }
 
     submittedRef.current = true;
+<<<<<<< HEAD
     // Do NOT setTimeExpired(true) here, it's a manual submit
+=======
+    setTimeExpired(true);
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
 
     if (timerRef.current) clearInterval(timerRef.current);
 
@@ -284,14 +372,22 @@ function GamePage() {
       setFinalSynonyms(
         synonymBox.map((w) => ({
           ...w,
+<<<<<<< HEAD
           correct: w.id.startsWith("syn_"),
+=======
+          correct: w.type === "synonym",
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
         })),
       );
 
       setFinalAntonyms(
         antonymBox.map((w) => ({
           ...w,
+<<<<<<< HEAD
           correct: w.id.startsWith("ant_"),
+=======
+          correct: w.type === "antonym",
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
         })),
       );
 
@@ -308,7 +404,10 @@ function GamePage() {
         synonyms: synonymBox.map((w) => w.id),
         antonyms: antonymBox.map((w) => w.id),
         timeTaken,
+<<<<<<< HEAD
         level, // Pass level for scoring
+=======
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
       });
 
       setResults(result);
@@ -323,11 +422,17 @@ function GamePage() {
   /* ================= HELPERS ================= */
 
   const handlePlayAgain = () => {
+<<<<<<< HEAD
+=======
+    if (timerRef.current) clearInterval(timerRef.current);
+    currentRoundIdRef.current = null; // Reset round_id ref
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
     initializeGame();
   };
 
   const handleExit = () => navigate("/landing");
 
+<<<<<<< HEAD
   const handleCertificate = async () => {
     if (certificateRef.current === null) return;
     try {
@@ -363,6 +468,8 @@ function GamePage() {
     }
   };
 
+=======
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
   const formatTime = (seconds) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
@@ -401,6 +508,7 @@ function GamePage() {
   }
 
   if (gameState === "completed") {
+<<<<<<< HEAD
     // Generate the full solution view based on the 8 words provided during the round
     const solutionSynonyms = gameData?.words.filter(w => w.id.startsWith('syn_')) || [];
     const solutionAntonyms = gameData?.words.filter(w => w.id.startsWith('ant_')) || [];
@@ -594,6 +702,109 @@ function GamePage() {
                 </div>
               </div>
             </div>
+=======
+    return (
+      <div className="game-page">
+        <div className="game-results">
+          <h2>Round Complete!</h2>
+
+          {timeExpired && timeLeft === 0 && (
+            <div className="time-expired-banner">
+              ⏱️ Time Expired — Submitted with Current Progress
+            </div>
+          )}
+
+          <div className="word-results-container">
+            <div className="result-section">
+              <h3>
+                Synonyms ({finalSynonyms.filter((w) => w.correct).length}/4
+                correct)
+              </h3>
+              <div className="result-words">
+                {finalSynonyms.map((word) => (
+                  <div
+                    key={word.id}
+                    className={`result-word-item ${
+                      word.correct ? "correct" : "incorrect"
+                    }`}
+                  >
+                    {word.word}
+                    <span className="result-indicator">
+                      {word.correct ? "✓" : "✗"}
+                    </span>
+                  </div>
+                ))}
+                {finalSynonyms.length < 4 && (
+                  <div className="result-word-item empty">
+                    Empty ({4 - finalSynonyms.length} missing)
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="result-section">
+              <h3>
+                Antonyms ({finalAntonyms.filter((w) => w.correct).length}/4
+                correct)
+              </h3>
+              <div className="result-words">
+                {finalAntonyms.map((word) => (
+                  <div
+                    key={word.id}
+                    className={`result-word-item ${
+                      word.correct ? "correct" : "incorrect"
+                    }`}
+                  >
+                    {word.word}
+                    <span className="result-indicator">
+                      {word.correct ? "✓" : "✗"}
+                    </span>
+                  </div>
+                ))}
+                {finalAntonyms.length < 4 && (
+                  <div className="result-word-item empty">
+                    Empty ({4 - finalAntonyms.length} missing)
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+
+          <div className="score-summary">
+            <div className="score-item">
+              <span className="score-label">Total Score:</span>
+              <span className="score-value">
+                {results ? results.score.toFixed(1) : "0"}
+              </span>
+            </div>
+            <div className="score-item">
+              <span className="score-label">Correct Words:</span>
+              <span className="score-value">
+                {results ? results.total_correct : "0"}/8
+              </span>
+            </div>
+            <div className="score-item">
+              <span className="score-label">Base Score:</span>
+              <span className="score-value">
+                {results ? results.base_score : "0"}
+              </span>
+            </div>
+            <div className="score-item">
+              <span className="score-label">Time Bonus:</span>
+              <span className="score-value">
+                +{(results ? results.time_bonus : 0).toFixed(1)}
+              </span>
+            </div>
+          </div>
+
+          <div className="game-actions">
+            <button className="btn-primary" onClick={handlePlayAgain}>
+              Play Again
+            </button>
+            <button className="btn-secondary" onClick={handleExit}>
+              Exit Game
+            </button>
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
           </div>
         </div>
       </div>
@@ -602,6 +813,7 @@ function GamePage() {
 
   /* ================= GAME UI ================= */
 
+<<<<<<< HEAD
   /* ================= GAME UI ================= */
 
   return (
@@ -698,15 +910,45 @@ function GamePage() {
               className={`source-pool ${dragOverBox === 'available' ? 'drag-over' : ''}`}
               onDragOver={handleDragOver}
               onDragEnter={(e) => handleDragEnter(e, "available")}
+=======
+  return (
+    <div className="game-page">
+      <div className="game-header">
+        <h1 className="anchor-word">{gameData?.anchor_word}</h1>
+        <div className="game-stats">
+          <span className="timer">
+            Time: {formatTime(timeLeft)}
+            {timeLeft <= 10 && <span className="time-warning"> ⚠️ Hurry!</span>}
+          </span>
+          <span className="player-info">
+            Team {user?.team_no} - {member?.name}
+          </span>
+        </div>
+      </div>
+
+      <div className="game-content">
+        <div className="word-areas">
+          <div className="word-section">
+            <h3>Words to Sort ({availableWords.length})</h3>
+            <div
+              className="word-container"
+              onDragOver={handleDragOver}
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
               onDrop={(e) => handleDrop(e, "available")}
             >
               {availableWords.map((word) => (
                 <div
                   key={word.id}
+<<<<<<< HEAD
                   className={`word-card ${draggedWord?.id === word.id ? 'dragging' : ''}`}
                   draggable={!timeExpired}
                   onDragStart={(e) => handleDragStart(e, word)}
                   onDragEnd={handleDragEnd}
+=======
+                  className="word-item"
+                  draggable={!timeExpired}
+                  onDragStart={(e) => handleDragStart(e, word)}
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
                 >
                   {word.word}
                 </div>
@@ -714,6 +956,7 @@ function GamePage() {
             </div>
           </div>
 
+<<<<<<< HEAD
         </div>
 
         <footer className="game-footer-controls">
@@ -729,6 +972,64 @@ function GamePage() {
           </button>
         </footer>
       </main>
+=======
+          <div className="word-section">
+            <h3>Synonyms ({synonymBox.length}/4)</h3>
+            <div
+              className="word-container"
+              onDragOver={handleDragOver}
+              onDrop={(e) => handleDrop(e, "synonyms")}
+            >
+              {synonymBox.map((word) => (
+                <div
+                  key={word.id}
+                  className="word-item"
+                  draggable={!timeExpired}
+                  onDragStart={(e) => handleDragStart(e, word)}
+                >
+                  {word.word}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="word-section">
+            <h3>Antonyms ({antonymBox.length}/4)</h3>
+            <div
+              className="word-container"
+              onDragOver={handleDragOver}
+              onDrop={(e) => handleDrop(e, "antonyms")}
+            >
+              {antonymBox.map((word) => (
+                <div
+                  key={word.id}
+                  className="word-item"
+                  draggable={!timeExpired}
+                  onDragStart={(e) => handleDragStart(e, word)}
+                >
+                  {word.word}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="game-actions">
+          <button
+            className="btn-primary"
+            onClick={handleSubmit}
+            disabled={
+              timeExpired || synonymBox.length !== 4 || antonymBox.length !== 4
+            }
+          >
+            Submit ({synonymBox.length + antonymBox.length}/8)
+          </button>
+          <button className="btn-secondary" onClick={handleExit}>
+            Exit Game
+          </button>
+        </div>
+      </div>
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
     </div>
   );
 }

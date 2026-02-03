@@ -1,4 +1,5 @@
 /* =====================================================
+<<<<<<< HEAD
    Finathon 2026 – UI Style Guideline
    Strictly following provided PDF
 ===================================================== */
@@ -15,25 +16,50 @@
 -------------------------------- */
 :root {
     /* --- Colors --- */
+=======
+   Finathon 2026 – Login Page Styles
+   Strictly following Style Guide
+===================================================== */
+
+/* -------------------------------
+   Fonts
+-------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Mulish:wght@400;600&display=swap');
+
+/* -------------------------------
+   Design Tokens
+-------------------------------- */
+:root {
+    /* Primary */
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
     --primary: #3377FF;
     --primary-dark: #2659BF;
     --primary-light: #99BBFF;
     --primary-subtle: #E3EDFF;
 
+<<<<<<< HEAD
     --success: #06C270;
     --info: #0063F7;
     --warning: #FFCC00;
     --error: #FF3B3B;
 
+=======
+    /* Dark */
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
     --dark-1: #3A3A3C;
     --dark-2: #6B7588;
     --dark-3: #8F90A6;
     --dark-4: #C7C9D9;
 
+<<<<<<< HEAD
+=======
+    /* Light */
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
     --light-1: #DDE5E9;
     --light-2: #EBEBF0;
     --light-3: #F2F2F5;
     --light-4: #FAFAFC;
+<<<<<<< HEAD
     --white: #FFFFFF;
 
     /* --- Typography --- */
@@ -280,11 +306,50 @@ input:disabled {
 /* -------------------------------
    Compat / Legacy Classes (Mapped to New System)
 -------------------------------- */
+=======
+
+    --error: #FF3B3B;
+    --success: #06C270;
+    --warning: #FFCC00;
+    --info: #0066F7;
+    --muted: #6B7588;
+    --light: #DDE5E9;
+    --dark: #3A3A3C;
+    --white: #FFFFFF;
+    --black: #000000;
+}
+
+/* -------------------------------
+   Base
+-------------------------------- */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Mulish', sans-serif;
+    background: var(--light-1);
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body.no-scroll {
+    overflow: hidden;
+}
+
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
 .landing-shell {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+<<<<<<< HEAD
     background-color: var(--light-4);
+=======
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
 }
 
 .landing-topbar {
@@ -299,6 +364,7 @@ input:disabled {
     z-index: 10;
 }
 
+<<<<<<< HEAD
 .landing-userbtn {
     width: 40px;
     height: 40px;
@@ -307,10 +373,30 @@ input:disabled {
     /* White border for avatar */
     background: var(--light-2);
     /* Fallback */
+=======
+.landing-team {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--dark-1);
+    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid var(--light-2);
+    padding: 8px 12px;
+    border-radius: 9999px;
+}
+
+.landing-userbtn {
+    width: 44px;
+    height: 44px;
+    border-radius: 9999px;
+    border: 1px solid var(--light-2);
+    background: rgba(255, 255, 255, 0.9);
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
     display: inline-flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+<<<<<<< HEAD
     transition: all 0.2s ease;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     position: relative;
@@ -343,6 +429,13 @@ input:disabled {
     border-radius: 50%;
     box-sizing: content-box;
     /* Ensure border doesn't shrink dot */
+=======
+}
+
+.landing-userbtn i {
+    font-size: 22px;
+    color: var(--dark-1);
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
 }
 
 .landing-center {
@@ -356,15 +449,23 @@ input:disabled {
 }
 
 .landing-title {
+<<<<<<< HEAD
     font-family: var(--font-heading);
     font-weight: 200;
     /* Extra Light as per Guide Display 1 */
     font-size: var(--text-display-lg);
     line-height: var(--lh-heading);
+=======
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: clamp(24px, 4vw, 40px);
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
     color: var(--dark-1);
 }
 
 .landing-subtitle {
+<<<<<<< HEAD
     font-family: var(--font-body);
     font-weight: 400;
     font-size: var(--text-body-lead);
@@ -426,6 +527,33 @@ input:disabled {
 .btn-cancel {
     background: var(--light-2);
     color: var(--dark-2);
+=======
+    margin: 10px 0 0;
+    font-family: 'Mulish', sans-serif;
+    font-weight: 500;
+    font-size: clamp(14px, 2.2vw, 18px);
+    color: var(--dark-2);
+}
+
+.landing-dropdown {
+    border-radius: 12px;
+    border: 1px solid var(--light-2);
+    padding: 0;
+    min-width: min(280px, calc(100vw - 32px));
+    max-width: calc(100vw - 32px);
+    transform: translate(0px, 46px);
+    position: absolute;
+    inset: 0px 0px auto auto;
+    margin: 0px;
+}
+
+@media (max-width: 480px) {
+    .landing-topbar {
+        top: 12px;
+        right: 12px;
+        left: 12px;
+    }
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
 }
 
 .landing-userline {
@@ -434,6 +562,7 @@ input:disabled {
     align-items: flex-start;
 }
 
+<<<<<<< HEAD
 .landing-userline>i {
     font-size: 20px;
     color: var(--primary);
@@ -510,12 +639,51 @@ input:disabled {
     /* Reduced from 40px */
     border-radius: 16px;
     background: #E3EDFF;
+=======
+.landing-userline i {
+    font-size: 28px;
+    color: var(--dark-2);
+}
+
+.landing-username {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--dark-1);
+}
+
+.landing-userdetail {
+    font-family: 'Mulish', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--dark-2);
+}
+
+.fixed-screen {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fixed-screen.bg-cover {
+    background: url("../assets/hackathon_bg.webp") center / cover no-repeat;
+}
+
+.center-card {
+    width: min(520px, calc(100% - 48px));
+    padding: 48px 40px;
+    border-radius: 16px;
+    background: rgba(41, 40, 40, 0.66);
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(6px);
     border: 1px solid var(--primary-subtle);
     display: flex;
     flex-direction: column;
     align-items: center;
+<<<<<<< HEAD
     gap: 16px;
     /* Reduced from 24px */
     overflow: visible;
@@ -711,3 +879,28 @@ body.dark-mode {
 
     color-scheme: dark;
 }
+=======
+    gap: 24px;
+}
+
+.cta-btn {
+    padding: 14px 40px;
+    border-radius: 9999px;
+    border: none;
+    cursor: pointer;
+    background: var(--primary);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.cta-btn:hover {
+    background: var(--primary-dark);
+}
+
+.cta-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(51, 119, 255, 0.3);
+}
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862

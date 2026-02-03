@@ -3,7 +3,10 @@ import re
 
 from django.http import HttpRequest, JsonResponse
 from django.views import View
+<<<<<<< HEAD
 from django.utils import timezone
+=======
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
 
 from .auth import (
     ExternalAuthError,
@@ -13,11 +16,16 @@ from .auth import (
     load_signed_otp_challenge,
     load_signed_session,
     post_form_json,
+<<<<<<< HEAD
     post_form_json,
     require_env,
 )
 from .models import SortonymWord, GameResult
 import random
+=======
+    require_env,
+)
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
 
 SYSTEM_NAME = 'isl'
 REGISTER_ROLE = 'isl_user'
@@ -291,6 +299,7 @@ class ApiOtpVerifyView(View):
                 'user': {'id': None, 'username': email},
             }
         )
+<<<<<<< HEAD
 
 
 
@@ -475,3 +484,5 @@ class ApiLeaderboardView(View):
                 break
             
         return JsonResponse({'leaderboard': data})
+=======
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862

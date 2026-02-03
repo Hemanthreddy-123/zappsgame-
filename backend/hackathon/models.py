@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from django.db import models
 
 class SortonymWord(models.Model):
@@ -18,3 +19,6 @@ class GameResult(models.Model):
 
     def __str__(self):
         return f"{self.player_email} - {self.score}"
+=======
+
+>>>>>>> c4aab529800c7f6d987e53657184410f45f54862
